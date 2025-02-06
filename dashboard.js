@@ -238,7 +238,7 @@ function updateConsumptionSuggestions(currentConsumption, yesterdayConsumption) 
             suggestions: [
                 'Considere usar mais luz natural durante o dia',
                 'Evite usar aparelhos em horários de pico (14:00-17:00)',
-                'Você pode economizar 15% desligando aparelhos em standby'
+                'Sabia que pode economizar 15% de energia ao desligar aparelhos que não estão a ser usados'
             ]
         };
     }
