@@ -210,7 +210,7 @@ function updateConsumptionSuggestions(currentConsumption, yesterdayConsumption) 
             text: 'Alto Consumo',
             class: 'high',
             icon: 'warning',
-            message: 'Seu consumo está acima do ideal',
+            message: 'O seu consumo está acima do ideal',
             suggestions: [
                 'Verifique se há aparelhos ligados desnecessariamente',
                 'Considere trocar equipamentos antigos por modelos mais eficientes',
@@ -222,7 +222,7 @@ function updateConsumptionSuggestions(currentConsumption, yesterdayConsumption) 
             text: 'Baixo Consumo',
             class: 'low',
             icon: 'eco',
-            message: 'Parabéns! Seu consumo está muito eficiente',
+            message: 'Parabéns! O seu consumo está muito eficiente',
             suggestions: [
                 'Continue mantendo bons hábitos de consumo',
                 'Compartilhe suas práticas de economia com outros',
@@ -234,7 +234,7 @@ function updateConsumptionSuggestions(currentConsumption, yesterdayConsumption) 
             text: 'Equilibrado',
             class: '',
             icon: 'tips_and_updates',
-            message: 'Seu consumo está dentro da média',
+            message: 'O seu consumo está dentro da média',
             suggestions: [
                 'Considere usar mais luz natural durante o dia',
                 'Evite usar aparelhos em horários de pico (14:00-17:00)',
