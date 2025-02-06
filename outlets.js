@@ -27,7 +27,7 @@ function loadOutlets() {
             if (snapshot.empty) {
                 outletsGrid.innerHTML = `
                     <div class="no-outlets">
-                        <p>Você ainda não tem tomadas cadastradas.</p>
+                        <p>Ainda não tem tomadas registadas.</p>
                     </div>
                 `;
                 return;
