@@ -11,28 +11,12 @@ O **EcoMonitor-Pi** é um projeto desenvolvido para monitorização ambiental, u
 
 ## Tecnologias Utilizadas
 - **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Python (se aplicável)
-- **Base de Dados:** Firebase/MySQL (se aplicável)
+- **Base de Dados:** Firebase
 - **Hospedagem:** GitHub Pages
 
 ## Como Aceder
 Podes aceder ao site através do seguinte link:
 [EcoMonitor-Pi](https://raikinha00.github.io/ecomonitor-pi/)
 
-## Como Contribuir
-Se quiseres contribuir para este projeto, segue estes passos:
-1. Faz um fork do repositório.
-2. Clona o repositório para o teu ambiente local.
-3. Cria uma nova branch com as tuas alterações.
-4. Sobe as alterações para o teu fork.
-5. Abre um Pull Request para revisão.
-
 ## Autor
 Desenvolvido por **Raikinha00**.
-
-## Licença
-Este projeto está sob a licença MIT. Sente-te à vontade para utilizá-lo e modificá-lo conforme necessário.
-
----
-Se precisares de mais detalhes ou ajustes, avisa-me! 😊
-
