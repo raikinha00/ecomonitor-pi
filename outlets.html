@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMonitor - Tomadas</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="outlets.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>EcoMonitor</h2>
+            </div>
+            
+            <nav>
+                <a href="index.html">
+                    <span class="material-icons">home</span>
+                    Home
+                </a>
+                <a href="dashboard.html">
+                    <span class="material-icons">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="consumption.html">
+                    <span class="material-icons">bolt</span>
+                    Consumo
+                </a>
+                <a href="outlets.html" class="active">
+                    <span class="material-icons">power</span>
+                    Tomadas
+                </a>
+                <a href="settings.html">
+                    <span class="material-icons">settings</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <main>
+            <header class="top-bar">
+                <h1>Gerenciar Tomadas</h1>
+                <div class="user-info">
+                    <!-- Preenchido dinamicamente pelo JavaScript -->
+                </div>
+            </header>
+
+            <div class="outlets-container">
+                <div class="add-outlet-card">
+                    <button class="add-outlet-btn" onclick="openAddOutletModal()">
+                        <span class="material-icons">add_circle</span>
+                        Adicionar Nova Tomada
+                    </button>
+                </div>
+
+                <div class="outlets-grid" id="outletsGrid">
+                    <!-- Tomadas serão adicionadas aqui dinamicamente -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para adicionar/editar tomada -->
+    <div id="outletModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeOutletModal()">&times;</span>
+            <h2 id="modalTitle">Adicionar Nova Tomada</h2>
+            
+            <form id="outletForm" class="outlet-form">
+                <div class="form-group">
+                    <label>Nome da Tomada</label>
+                    <input type="text" id="outletName" placeholder="Ex: Tomada da TV" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Divisão</label>
+                    <input type="text" id="outletRoom" placeholder="Ex: Sala, Quarto, Cozinha..." required>
+                </div>
+
+                <div class="form-group">
+                    <label>Ícone</label>
+                    <div class="icon-grid" id="iconGrid">
+                        <div class="icon-option" data-icon="tv">
+                            <span class="material-icons">tv</span>
+                        </div>
+                        <div class="icon-option" data-icon="computer">
+                            <span class="material-icons">computer</span>
+                        </div>
+                        <div class="icon-option" data-icon="kitchen">
+                            <span class="material-icons">kitchen</span>
+                        </div>
+                        <div class="icon-option" data-icon="wash">
+                            <span class="material-icons">local_laundry_service</span>
+                        </div>
+                        <div class="icon-option" data-icon="lightbulb">
+                            <span class="material-icons">lightbulb</span>
+                        </div>
+                        <div class="icon-option" data-icon="router">
+                            <span class="material-icons">router</span>
+                        </div>
+                        <div class="icon-option" data-icon="ac_unit">
+                            <span class="material-icons">ac_unit</span>
+                        </div>
+                        <div class="icon-option" data-icon="power">
+                            <span class="material-icons">power</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selectedIcon" required>
+                </div>
+
+                <button type="submit" class="save-btn" id="saveButton">
+                    <div class="loading-spinner"></div>
+                    <span class="material-icons">save</span>
+                    <span class="button-text">Salvar Tomada</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="modal delete-modal">
+        <div class="modal-content delete-modal-content">
+            <h2>Confirmar Exclusão</h2>
+            <p>Tem certeza que deseja excluir esta tomada?</p>
+            <p>Esta ação não pode ser desfeita.</p>
+            <div class="delete-modal-actions">
+                <button class="cancel-btn" onclick="closeDeleteModal()">
+                    <span class="material-icons">close</span>
+                    Cancelar
+                </button>
+                <button class="confirm-delete-btn" onclick="confirmDelete()">
+                    <span class="material-icons">delete_forever</span>
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="outlets.js"></script>
+</body>
+</html> 

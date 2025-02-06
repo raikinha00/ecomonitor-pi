@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMonitor - Dashboard</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>EcoMonitor</h2>
+            </div>
+            
+            <nav>
+                <a href="index.html">
+                    <span class="material-icons">home</span>
+                    Home
+                </a>
+                <a href="dashboard.html" class="active">
+                    <span class="material-icons">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="consumption.html">
+                    <span class="material-icons">bolt</span>
+                    Consumo
+                </a>
+                <a href="outlets.html">
+                    <span class="material-icons">power</span>
+                    Tomadas
+                </a>
+                <a href="settings.html">
+                    <span class="material-icons">settings</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <main>
+            <header class="top-bar">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    <span class="material-icons">notifications</span>
+                    <span class="material-icons">account_circle</span>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-icons">electric_bolt</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Today's Usage</h3>
+                        <h2>2.4 kWh</h2>
+                        <p class="trend positive">↑ 12% vs yesterday</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-icons">payments</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Estimated Cost</h3>
+                        <h2>$3.50</h2>
+                        <p class="trend negative">↓ 8% vs yesterday</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-icons">schedule</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Peak Hours</h3>
+                        <h2>2:00 PM</h2>
+                        <p>0.45 kWh peak usage</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>Daily Consumption</h2>
+                    <div class="chart-filters">
+                        <button class="active" data-period="day">Day</button>
+                        <button data-period="week">Week</button>
+                        <button data-period="month">Month</button>
+                    </div>
+                </div>
+                <div class="usage-chart">
+                    <canvas id="consumptionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="suggestions-container">
+                <div class="suggestions-header">
+                    <h2>Análise de Consumo</h2>
+                    <span class="status-badge">Equilibrado</span>
+                </div>
+                <div class="suggestions-content">
+                    <div class="status-icon">
+                        <span class="material-icons">tips_and_updates</span>
+                    </div>
+                    <div class="suggestions-text">
+                        <p class="consumption-status">Seu consumo está dentro da média</p>
+                        <ul class="suggestions-list">
+                            <li>
+                                <span class="material-icons">lightbulb</span>
+                                <span>Dica: Considere usar mais luz natural durante o dia</span>
+                            </li>
+                            <li>
+                                <span class="material-icons">schedule</span>
+                                <span>Evite usar aparelhos em horários de pico (14:00-17:00)</span>
+                            </li>
+                            <li>
+                                <span class="material-icons">trending_down</span>
+                                <span>Você pode economizar 15% desligando aparelhos em standby</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html> 

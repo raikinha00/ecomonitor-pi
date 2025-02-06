@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMonitor - Consumo de Energia</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="consumption.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>EcoMonitor</h2>
+            </div>
+            
+            <nav>
+                <a href="index.html">
+                    <span class="material-icons">home</span>
+                    Home
+                </a>
+                <a href="dashboard.html">
+                    <span class="material-icons">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="consumption.html" class="active">
+                    <span class="material-icons">bolt</span>
+                    Consumo
+                </a>
+                <a href="outlets.html">
+                    <span class="material-icons">power</span>
+                    Tomadas
+                </a>
+                <a href="settings.html">
+                    <span class="material-icons">settings</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <main>
+            <header class="top-bar">
+                <h1>Consumo de Energia</h1>
+                <div class="user-info">
+                    <!-- Preenchido dinamicamente pelo JavaScript -->
+                </div>
+            </header>
+
+            <div class="consumption-container">
+                <div class="current-consumption">
+                    <h2>Consumo Atual</h2>
+                    <div class="outlet-selector">
+                        <label for="outletSelect">Selecione a Tomada:</label>
+                        <select id="outletSelect" required>
+                            <option value="">Escolha uma tomada...</option>
+                        </select>
+                    </div>
+                    <div class="consumption-value">
+                        <span id="currentWatts">0.0</span>
+                        <span class="unit">W</span>
+                    </div>
+                    <div class="cost-value">
+                        <span id="currentCost">0.000</span>
+                        <span class="unit">€/h</span>
+                    </div>
+                    <div class="real-time-indicator">
+                        <div class="pulse"></div>
+                        <span>Monitoramento em tempo real</span>
+                    </div>
+                    <div class="simulation-controls">
+                        <button id="startSimulation" class="control-btn">
+                            <span class="material-icons">play_arrow</span>
+                            Iniciar Monitoramento
+                        </button>
+                        <button id="stopSimulation" class="control-btn" disabled>
+                            <span class="material-icons">stop</span>
+                            Parar Monitoramento
+                        </button>
+                        <button id="saveConsumption" class="control-btn">
+                            <span class="material-icons">save</span>
+                            Salvar Registro
+                        </button>
+                    </div>
+                </div>
+
+                <div class="consumption-stats">
+                    <div class="stat-card">
+                        <h3>Hoje</h3>
+                        <div class="stat-value">
+                            <span id="todayConsumption">0.00</span>
+                            <span class="unit">kWh</span>
+                        </div>
+                        <div class="cost">
+                            <span id="todayCost">0.00</span>
+                            <span class="unit">€</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Este Mês</h3>
+                        <div class="stat-value">
+                            <span id="monthConsumption">0.00</span>
+                            <span class="unit">kWh</span>
+                        </div>
+                        <div class="cost">
+                            <span id="monthCost">0.00</span>
+                            <span class="unit">€</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-chart">
+                    <h2>Histórico de Consumo</h2>
+                    <canvas id="consumptionHistory"></canvas>
+                </div>
+
+                <div class="consumption-table">
+                    <h2>Registros de Consumo</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Período</th>
+                                <th>Consumo (kWh)</th>
+                                <th>Custo (€)</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="consumptionTableBody">
+                            <!-- Preenchido dinamicamente pelo JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Warning Modal -->
+    <div id="warningModal" class="modal warning-modal">
+        <div class="modal-content warning-modal-content">
+            <span class="close-btn" onclick="closeWarningModal()">&times;</span>
+            <div class="warning-icon">
+                <span class="material-icons">warning</span>
+            </div>
+            <h2>Atenção</h2>
+            <p>Por favor, selecione uma tomada para iniciar o monitoramento.</p>
+            <button class="ok-btn" onclick="closeWarningModal()">
+                <span class="material-icons">check</span>
+                OK
+            </button>
+        </div>
+    </div>
+
+    <!-- Initial Alert Modal -->
+    <div id="initialAlertModal" class="modal alert-modal">
+        <div class="modal-content alert-modal-content">
+            <span class="close-btn" onclick="closeInitialAlert()">&times;</span>
+            <div class="info-icon">
+                <span class="material-icons">info</span>
+            </div>
+            <h2>Bem-vindo ao Monitoramento</h2>
+            <p>Para começar a monitorar o consumo de energia:</p>
+            <ol class="alert-steps">
+                <li>Selecione uma tomada no menu dropdown</li>
+                <li>Clique em "Iniciar Monitoramento"</li>
+                <li>Acompanhe o consumo em tempo real</li>
+            </ol>
+            <button class="ok-btn" onclick="closeInitialAlert()">
+                <span class="material-icons">thumb_up</span>
+                Entendi
+            </button>
+        </div>
+    </div>
+    
+    <!-- Nossos scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="consumption.js"></script>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="modal delete-confirm-modal">
+        <div class="modal-content delete-modal-content">
+            <span class="close-btn" onclick="closeDeleteConfirmModal()">&times;</span>
+            <div class="delete-icon">
+                <span class="material-icons">delete_forever</span>
+            </div>
+            <h2>Confirmar Exclusão</h2>
+            <p>Tem certeza que deseja excluir este registro de consumo?</p>
+            <p class="warning-text">Esta ação não pode ser desfeita.</p>
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeDeleteConfirmModal()">
+                    <span class="material-icons">close</span>
+                    Cancelar
+                </button>
+                <button class="confirm-delete-btn" onclick="confirmDelete()">
+                    <span class="material-icons">delete</span>
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

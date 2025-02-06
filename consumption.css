@@ -1,0 +1,697 @@
+:root {
+    --primary: #0EA5E9;
+    --primary-light: #38BDF8;
+    --dark-bg: #0F172A;
+    --card-bg: #1E293B;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --success: #22C55E;
+    --danger: #EF4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    position: fixed;
+    height: 100vh;
+}
+
+/* ... (reutilizar estilos do sidebar do dashboard.css) ... */
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    position: fixed;
+    height: 100vh;
+    transition: all 0.3s ease;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary);
+}
+
+.logo .material-icons {
+    font-size: 2rem;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar nav a:hover {
+    background-color: rgba(14, 165, 233, 0.1);
+    color: var(--primary);
+}
+
+.sidebar nav a.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.sidebar nav a.active:hover {
+    background-color: var(--primary-light);
+}
+
+.sidebar nav a.active .material-icons {
+    color: white;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    margin-left: 250px;
+    padding: 2rem;
+    width: calc(100% - 250px);
+}
+
+.consumption-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.current-consumption {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.consumption-value {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.cost-value {
+    font-size: 2rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.consumption-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0.5rem 0;
+}
+
+.cost {
+    color: var(--text-secondary);
+}
+
+.history-chart {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    height: 400px;
+}
+
+.unit {
+    font-size: 0.5em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.simulation-controls {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,123,255,0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+    background: linear-gradient(45deg, #0056b3, #004494);
+}
+
+.control-btn:disabled {
+    background: linear-gradient(45deg, #94a3b8, #64748b);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.control-btn .material-icons {
+    font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    main {
+        margin-left: 0;
+    }
+    
+    .consumption-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+.consumption-table {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+}
+
+.consumption-table h2 {
+    margin-bottom: 1.5rem;
+}
+
+.consumption-table table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+    margin-top: 1.5rem;
+}
+
+.consumption-table th,
+.consumption-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.consumption-table th {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.consumption-table tr:hover {
+    background-color: rgba(14, 165, 233, 0.05);
+}
+
+.delete-btn {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.delete-btn .material-icons {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .consumption-table {
+        overflow-x: auto
+    }
+}
+
+/* Disable text selection globally for labels and icons */
+.sidebar nav a,
+.logo,
+.material-icons,
+.top-bar h1,
+.user-info span,
+.user-profile span,
+.consumption-value span,
+.cost-value span,
+.consumption-table th,
+.stat-card h3,
+.stat-card h2,
+.stat-card p,
+.current-consumption h2,
+.current-consumption span,
+.consumption-stats h3,
+.consumption-stats span,
+.consumption-table h2,
+.consumption-table td,
+.chart-header h2,
+.chart-filters button,
+.simulation-controls button,
+.control-btn span,
+.delete-btn span,
+.history-chart h2,
+.consumption-history-label,
+.consumption-history-value,
+#currentWatts,
+#currentCost,
+#todayConsumption,
+#todayCost,
+#monthConsumption,
+#monthCost,
+label,
+button,
+.unit {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.chart-header {
+    margin-bottom: 2rem;
+}
+
+.real-time-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--success);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.real-time-indicator .pulse {
+    width: 8px;
+    height: 8px;
+    background-color: var(--success);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.outlet-selector {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.outlet-selector label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.outlet-selector select {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.outlet-selector select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+}
+
+.outlet-selector select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.outlet-selector select option {
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    padding: 0.8rem;
+}
+
+/* Modal Base Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .modal-content {
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Warning Modal Styles */
+.warning-modal .modal-content {
+    max-width: 400px;
+    text-align: center;
+    padding: 2rem;
+}
+
+.warning-modal .close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.warning-modal .close-btn:hover {
+    color: var(--text-primary);
+}
+
+.warning-icon {
+    margin-bottom: 1rem;
+}
+
+.warning-icon .material-icons {
+    font-size: 3rem;
+    color: #FFA500;
+    animation: pulse-warning 2s infinite;
+}
+
+.warning-modal h2 {
+    color: #FFA500;
+    margin-bottom: 1rem;
+}
+
+.warning-modal p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.ok-btn {
+    padding: 0.8rem 2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.ok-btn:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+@keyframes pulse-warning {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Error Message Styles */
+.error-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--danger);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Alert Modal Styles */
+.alert-modal .modal-content {
+    max-width: 450px;
+    text-align: center;
+    padding: 2rem;
+}
+
+.alert-modal .close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.alert-modal .close-btn:hover {
+    color: var(--text-primary);
+}
+
+.info-icon {
+    margin-bottom: 1rem;
+}
+
+.info-icon .material-icons {
+    font-size: 3rem;
+    color: var(--primary);
+    animation: bounce 2s infinite;
+}
+
+.alert-modal h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.alert-modal p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.alert-steps {
+    text-align: left;
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.alert-steps li {
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.alert-steps li::marker {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    60% {
+        transform: translateY(-7px);
+    }
+}
+
+/* Delete Confirmation Modal Styles */
+.delete-confirm-modal {
+    display: none;
+}
+
+.delete-confirm-modal .modal-content {
+    max-width: 350px;
+    text-align: center;
+    padding: 3rem;
+    background-color: #1E293B;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.delete-icon {
+    margin-bottom: 1rem;
+}
+
+.delete-icon .material-icons {
+    font-size: 2.5rem;
+    color: #EF4444;
+}
+
+.delete-confirm-modal h2 {
+    color: #EF4444;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.delete-confirm-modal p {
+    color: #94A3B8;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.warning-text {
+    font-size: 0.85rem;
+    color: #EF4444 !important;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.cancel-btn, .confirm-delete-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    color: #F1F5F9;
+    border: 1px solid #475569;
+}
+
+.cancel-btn:hover {
+    background-color: rgba(71, 85, 105, 0.2);
+}
+
+.confirm-delete-btn {
+    background-color: #EF4444;
+    color: white;
+}
+
+.confirm-delete-btn:hover {
+    background-color: #DC2626;
+}
+
+.delete-confirm-modal .close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.25rem;
+    color: #64748B;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.delete-confirm-modal .close-btn:hover {
+    color: #94A3B8;
+}
+
+/* Ajuste da animação para ser mais sutil */
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}

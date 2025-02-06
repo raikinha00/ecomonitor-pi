@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMonitor - Configurações</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="settings.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>EcoMonitor</h2>
+            </div>
+            
+            <nav>
+                <a href="index.html">
+                    <span class="material-icons">home</span>
+                    Home
+                </a>
+                <a href="dashboard.html">
+                    <span class="material-icons">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="consumption.html">
+                    <span class="material-icons">bolt</span>
+                    Consumo
+                </a>
+                <a href="outlets.html">
+                    <span class="material-icons">power</span>
+                    Tomadas
+                </a>
+                <a href="settings.html" class="active">
+                    <span class="material-icons">settings</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <main>
+            <header class="top-bar">
+                <h1>Configurações</h1>
+                <div class="user-info">
+                    <!-- Preenchido dinamicamente pelo JavaScript -->
+                </div>
+            </header>
+
+            <div class="settings-container">
+                <div class="profile-section">
+                    <div class="profile-header">
+                        <div class="profile-image-container">
+                            <img id="profileImage" src="" alt="Profile Picture">
+                            <div class="image-upload">
+                                <button type="button" id="changePhotoBtn" class="change-photo-btn">
+                                    <span class="material-icons">photo_camera</span>
+                                </button>
+                            </div>
+                        </div>
+                        <h2 id="userName">Carregando...</h2>
+                        <p id="userEmail">carregando@email.com</p>
+                    </div>
+
+                    <div class="settings-sections">
+                        <div class="settings-card">
+                            <h3>Informações Pessoais</h3>
+                            <form id="profileForm" class="settings-form">
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <input type="text" id="nameInput" placeholder="Seu nome">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="emailInput" placeholder="seu@email.com" disabled>
+                                </div>
+                                <button type="submit" class="save-btn">
+                                    <span class="material-icons">save</span>
+                                    Salvar Alterações
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Segurança</h3>
+                            <form id="passwordForm" class="settings-form">
+                                <p class="form-description">
+                                    Para redefinir sua senha, clique no botão abaixo. Um email será enviado com as instruções.
+                                </p>
+                                <button type="submit" class="save-btn">
+                                    <span class="material-icons">lock_reset</span>
+                                    Redefinir Senha
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Preferências</h3>
+                            <form id="preferencesForm" class="settings-form">
+                                <div class="form-group">
+                                    <label>Moeda</label>
+                                    <select id="currencySelect">
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="USD">USD ($)</option>
+                                        <option value="GBP">GBP (£)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Notificações</label>
+                                    <div class="toggle-group">
+                                        <label class="toggle">
+                                            <input type="checkbox" id="emailNotifications">
+                                            <span class="toggle-slider"></span>
+                                            Email
+                                        </label>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="pushNotifications">
+                                            <span class="toggle-slider"></span>
+                                            Push
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="save-btn">
+                                    <span class="material-icons">settings</span>
+                                    Salvar Preferências
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="settings-card danger-zone">
+                            <h3>Zona de Perigo</h3>
+                            <p>Ações irreversíveis para sua conta</p>
+                            <button class="delete-account-btn" onclick="confirmDeleteAccount()">
+                                <span class="material-icons">delete_forever</span>
+                                Excluir Conta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Adicionar o modal de foto no final do body, antes dos scripts -->
+    <div id="photoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePhotoModal()">&times;</span>
+            <h2>Alterar Foto de Perfil</h2>
+            <form id="photoForm" class="settings-form">
+                <div class="form-group">
+                    <label>URL da Imagem</label>
+                    <input type="url" id="photoUrlInput" placeholder="https://exemplo.com/foto.jpg" required>
+                    <p class="form-description">Insira o URL de uma imagem (jpeg, jpg, gif, png)</p>
+                </div>
+                <button type="submit" class="save-btn">
+                    <span class="material-icons">save</span>
+                    Salvar Foto
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html> 

@@ -1,0 +1,52 @@
+/* CSS Variables */
+:root {
+    --primary: #0EA5E9;
+    --primary-light: #38BDF8;
+    --dark-bg: #0F172A;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --success: #22C55E;
+    --danger: #EF4444;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--card-bg);
+    border-radius: 5px;
+    border: 2px solid var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0ea5e9 var(--dark-bg);
+}
+
+/* Ensure content doesn't jump when scrollbar appears */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* Global scrollable containers */
+.sidebar {
+    overflow-y: auto;
+}
+
+main {
+    height: 100vh;
+    overflow-y: auto;
+} 

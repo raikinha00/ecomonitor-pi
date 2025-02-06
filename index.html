@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMonitor - Energy Tracking</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>EcoMonitor</h2>
+            </div>
+            
+            <nav>
+                <a href="index.html" class="active">
+                    <span class="material-icons">home</span>Home
+                </a>
+                <a href="dashboard.html">
+                    <span class="material-icons">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="consumption.html">
+                    <span class="material-icons">bolt</span>
+                    Consumo
+                </a>
+                <a href="outlets.html">
+                    <span class="material-icons">power</span>
+                    Tomadas
+                </a>
+                <a href="settings.html">
+                    <span class="material-icons">settings</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <main>
+            <header class="top-bar">
+                <h1>Bem vindo ao EcoMonitor</h1>
+                <div class="user-info">
+                    <span class="material-icons">notifications</span>
+                    <button class="login-btn" onclick="openLoginModal()">Login</button>
+                </div>
+            </header>
+
+            <!-- Login Modal -->
+            <div id="loginModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeLoginModal()">&times;</span>
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                        <button class="tab-btn" onclick="switchTab('register')">Criar Conta</button>
+                    </div>
+                    
+                    <form id="loginForm" class="auth-form">
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Entrar</button>
+                        <div class="forgot-password">
+                            <button type="button" class="forgot-btn" onclick="switchTab('reset')">
+                                Esqueceu sua senha?
+                            </button>
+                        </div>
+                        <div class="social-login">
+                            <button type="button" class="google-btn" onclick="signInWithGoogle()">
+                                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                                Login com Google
+                            </button>
+                        </div>
+                    </form>
+
+                    <form id="registerForm" class="auth-form" style="display: none;">
+                        <input type="text" placeholder="Nome" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Confirmar Password" required>
+                        <button type="submit">Criar Conta</button>
+                    </form>
+
+                    <form id="resetForm" class="auth-form" style="display: none;">
+                        <div class="reset-header">
+                            <span class="material-icons">lock_reset</span>
+                            <h2>Redefinir Senha</h2>
+                            <p>Digite seu email para receber as instruções de redefinição de senha</p>
+                        </div>
+                        <input type="email" placeholder="Email" required>
+                        <button type="submit">Enviar Email</button>
+                        <button type="button" class="back-btn" onclick="switchTab('login')">
+                            <span class="material-icons">arrow_back</span>
+                            Voltar para Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Nova seção de boas-vindas -->
+            <div class="welcome-section">
+                <div class="hero-content">
+                    <h2>Monitorize Seu Consumo de Energia de Forma Inteligente</h2>
+                    <p>Acompanhe, analise e otimize seu consumo de energia com nosso sistema de monitoramento inteligente.</p>
+                    <div class="cta-buttons">
+                        <button class="primary-btn" onclick="openLoginModal()">Começar</button>
+                        <button class="secondary-btn">Ver mais</button>
+                    </div>
+                </div>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <span class="material-icons">insights</span>
+                        <h3>Monitorize em Tempo Real</h3>
+                        <p>Acompanhe seu consumo de energia em tempo real com análises detalhadas</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="material-icons">savings</span>
+                        <h3>Economia de Custos</h3>
+                        <p>Identifique oportunidades para reduzir seus custos de energia</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="material-icons">eco</span>
+                        <h3>Ecológico</h3>
+                        <p>Reduza sua pegada de carbono com gerenciamento inteligente de energia</p>
+                    </div>
+                </div>
+            </div>
+
+            
+        </main>
+    </div>
+
+    <!-- Auth Alert Modal -->
+    <div id="authAlertModal" class="modal auth-alert-modal">
+        <div class="modal-content">
+            <div class="auth-alert">
+                <span class="material-icons alert-icon">lock</span>
+                <h2>Autenticação Necessária</h2>
+                <p>Por favor, faça login para acessar esta área.</p>
+                <button class="primary-btn" onclick="openLoginModal(); closeAuthAlert();">Login</button>
+                <button class="secondary-btn" onclick="closeAuthAlert()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
